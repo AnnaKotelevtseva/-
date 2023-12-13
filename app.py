@@ -1,10 +1,15 @@
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import select
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///notes.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///zam.db'
 db = SQLAlchemy(app)
 
+from datetime import datetime
+from typing import Self
+from app import db
+   
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -25,8 +30,7 @@ def add():
         return redirect('/')
     return render_template('add.html')
 
-@app.route('/view')
-def view():
-    return render_template('view.html')
 if __name__ == "__main__":
     app.run(debug=True)
+
+
