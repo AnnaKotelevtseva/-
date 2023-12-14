@@ -1,16 +1,47 @@
 <html>
 <head>
-    <title>Простой блокнот</title>
+    <title>Добро пожаловать в блокнот</title>
 </head>
 <body>
-    <h1>Простой блокнот</h1>
-    <form action="/save" method="POST/">
-        <textarea name="text" rows="10" cols="50"></textarea>
-        <br>
-        <input type="submit" value="Сохранить">
-    </form>
-    {% if message %}
-    <p>{{ message }}</p>
-    {% endif %}
-</body>
-</html>
+    <a href="{{url_for('index')}}">Перейти на главную</a> 
+    <h1>Блокнот</h1>
+                    <table class ="table">  <!-- Начало таблицы с применением класса "table" -->
+                    <caption class = "subtitle">Заметки</caption>  <!-- Заголовок таблицы с применением класса "subtitle" -->
+                    <thead class ="thead">  <!-- Заголовок таблицы с применением класса "thead" -->
+                        <tr>  <!-- Начало строки заголовков -->
+                        <th>Id</th>  <!-- Заголовок столбца "Id" -->
+                        <th>nazvan</th>  
+                        <th>sod</th>   
+                        <th>date</th>                  
+                        </tr>  <!-- Конец строки заголовков -->
+                    </thead>  <!-- Конец заголовка таблицы -->
+                    <tbody >  <!-- Начало тела таблицы -->
+                        {% for note in notes %}  <!-- Цикл для вывода информации о заметках -->
+                        <tr>  <!-- Начало строки для каждогй заметки -->
+                            <th>{{note.id}}</th>  <!-- Отображение идентификатора заметки -->
+                            <th>{{note.nazvan}}</th>  <!-- Отображение имени автора заметки слева по выравниванию -->
+                            <th>{{note.sod}}</th> 
+                            <th>{{note.date}}</th>  <!-- Отображение даты создания заметки -->                    
+                        </tr>  <!-- Конец строки для каждогй заметки -->
+                        {% endfor %}  <!-- Завершение цикла для вывода заметки -->
+
+                    </tbody>  <!-- Конец тела таблицы -->
+                    </table>  <!-- Конец таблицы -->
+                    <h1>Добавление заметки в блокнот</h1>  <!-- Заголовок страницы -->
+
+            <form action="/save" method="POST"> 
+            <p>  <textarea name="note_data" rows="10" cols='50'></textarea></p>
+                    <br>
+                    <br>
+            <p>  <input type="text" /></p>   
+                    <br>
+                    <br>
+            <p>  <input type="text" name="date" placeholder="Введите дату создания" size="15" /> </p>
+                   <br>
+                   <br>
+            <button type="submit">Сохранить</button> 
+                  <br>
+                  <br>
+            </form> 
+            </body>
+            </html>
